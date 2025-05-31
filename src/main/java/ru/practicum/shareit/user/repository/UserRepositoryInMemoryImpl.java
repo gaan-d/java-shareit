@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.baseClass.BaseInMemoryRepository;
 import ru.practicum.shareit.user.User;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository

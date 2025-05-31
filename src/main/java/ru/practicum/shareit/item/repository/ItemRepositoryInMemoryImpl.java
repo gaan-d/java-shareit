@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.baseClass.BaseInMemoryRepository;
 import ru.practicum.shareit.item.model.Item;
 
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 @Repository
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
