@@ -27,9 +27,9 @@ public class ErrorHandler {
         return new ExceptionResponse("Данные уже существуют", e.getMessage());
     }
 
-    @ExceptionHandler(InternalServerErrorException.class)
+    @ExceptionHandler({InternalServerErrorException.class, Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ExceptionResponse handleInternalServerErrorException(InternalServerErrorException e) {
+    public ExceptionResponse handleInternalAndGeneralExceptions(Exception e) {
         return new ExceptionResponse("Внутренняя ошибка сервера", e.getMessage());
     }
 
