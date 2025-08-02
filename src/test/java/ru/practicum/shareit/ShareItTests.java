@@ -12,5 +12,4 @@ class ShareItTests {
     void contextLoads() {
         assertTrue(true);
     }
-
 }
