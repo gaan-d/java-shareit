@@ -6,8 +6,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.BookingMapper;
-import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.BookingRepository;
+import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.NewBookingDto;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.BookingState;
@@ -105,10 +105,12 @@ public class BookingServiceImpl implements BookingService {
                     SORT_BY_START_DESC);
             case REJECTED -> bookings = bookingRepository.findAllByItemOwnerIdAndStatus(userId, BookingStatus.REJECTED,
                     SORT_BY_START_DESC);
-            case PAST ->  bookings = bookingRepository.findAllByItemOwnerIdAndEndBefore(userId, now, SORT_BY_START_DESC);
-            case CURRENT -> bookings = bookingRepository.findAllByItemOwnerIdAndStartLessThanEqualAndEndGreaterThanEqual(userId,
-                    now, now, SORT_BY_START_DESC);
-            case FUTURE -> bookings = bookingRepository.findAllByItemOwnerIdAndStartAfter(userId, now, SORT_BY_START_DESC);
+            case PAST -> bookings = bookingRepository.findAllByItemOwnerIdAndEndBefore(userId, now, SORT_BY_START_DESC);
+            case CURRENT ->
+                    bookings = bookingRepository.findAllByItemOwnerIdAndStartLessThanEqualAndEndGreaterThanEqual(userId,
+                            now, now, SORT_BY_START_DESC);
+            case FUTURE ->
+                    bookings = bookingRepository.findAllByItemOwnerIdAndStartAfter(userId, now, SORT_BY_START_DESC);
             default -> new ArrayList<>();
         };
 

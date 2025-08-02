@@ -9,7 +9,9 @@ import ru.practicum.shareit.user.User;
 import java.time.LocalDateTime;
 
 @Builder
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode(of = {"id"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
