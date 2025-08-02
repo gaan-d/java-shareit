@@ -33,6 +33,12 @@ public class ErrorHandler {
         return new ExceptionResponse("Внутренняя ошибка сервера", e.getMessage());
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionResponse handleAccessDeniedException(AccessDeniedException e) {
+        return new ExceptionResponse("Доступ запрещен", e.getMessage());
+    }
+
     @Getter
     @AllArgsConstructor
     public static class ExceptionResponse {
