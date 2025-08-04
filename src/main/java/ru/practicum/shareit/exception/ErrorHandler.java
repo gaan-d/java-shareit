@@ -2,6 +2,7 @@ package ru.practicum.shareit.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -41,6 +42,7 @@ public class ErrorHandler {
 
     @Getter
     @AllArgsConstructor
+    @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
     public static class ExceptionResponse {
         String error;
         String message;
