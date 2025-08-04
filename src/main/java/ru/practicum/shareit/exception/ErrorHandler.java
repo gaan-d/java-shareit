@@ -2,6 +2,7 @@ package ru.practicum.shareit.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -33,8 +34,15 @@ public class ErrorHandler {
         return new ExceptionResponse("Внутренняя ошибка сервера", e.getMessage());
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionResponse handleAccessDeniedException(AccessDeniedException e) {
+        return new ExceptionResponse("Доступ запрещен", e.getMessage());
+    }
+
     @Getter
     @AllArgsConstructor
+    @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
     public static class ExceptionResponse {
         String error;
         String message;

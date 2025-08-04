@@ -4,6 +4,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import ru.practicum.shareit.booking.dto.BookingDto;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -13,5 +16,7 @@ public class ItemDto {
     String name;
     String description;
     Boolean available;
-    int rentalCount;
+    BookingDto lastBooking;
+    BookingDto nextBooking;
+    List<CommentDto> comments;
 }

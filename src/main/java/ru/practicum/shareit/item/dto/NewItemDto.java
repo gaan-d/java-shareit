@@ -19,9 +19,4 @@ public class NewItemDto {
 
     @NotNull(message = "Параметр \"Статус аренды\" не может быть пустым")
     Boolean available;
-
-    Long ownerId;
-
-    @Builder.Default
-    int rentalCount = 0;
 }

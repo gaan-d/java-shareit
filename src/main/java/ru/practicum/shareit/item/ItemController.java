@@ -5,9 +5,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.item.dto.NewItemDto;
-import ru.practicum.shareit.item.dto.UpdateItemDto;
+import ru.practicum.shareit.item.dto.*;
 import ru.practicum.shareit.item.service.ItemService;
 
 import java.util.List;
@@ -30,8 +28,8 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    public ItemDto getItemById(@PathVariable Long itemId) {
-        return itemService.findById(itemId);
+    public ItemDto getItemById(@RequestHeader("X-Sharer-User-Id") Long userId, @PathVariable Long itemId) {
+        return itemService.findById(userId, itemId);
     }
 
     @PostMapping
@@ -45,5 +43,12 @@ public class ItemController {
                               @PathVariable("itemId") Long itemId,
                               @Valid @RequestBody UpdateItemDto itemDto) {
         return itemService.update(userId, itemId, itemDto);
+    }
+
+    @PostMapping("/{itemId}/comment")
+    public CommentDto addComment(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                 @PathVariable("itemId") Long itemId,
+                                 @RequestBody NewCommentDto commentDto) {
+        return itemService.addComment(userId, itemId, commentDto);
     }
 }

@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(Long userId, UpdateUserDto userUpdateDto) {
         User user = validateExistenceById(userId);
-        validateEmail(userUpdateDto.getEmail());
+        validateEmailOnUpdate(userUpdateDto.getEmail(), userId);
         updateUser(user, userUpdateDto);
-        userRepository.update(user);
+        userRepository.save(user);
         return mapToUserDto(user);
     }
 
@@ -64,11 +64,18 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new NotFoundException(String.format("Пользователь с id %d не найден", userId)));
     }
 
-    @Override
     public void validateEmail(String email) {
         Optional<User> userExistsCheck = userRepository.findByEmail(email);
         if (userExistsCheck.isPresent()) {
             throw new DuplicatedDataException(String.format("Пользователь с email %s уже существует", email));
         }
+    }
+
+    public void validateEmailOnUpdate(String email, Long userId) {
+        userRepository.findByEmail(email).ifPresent(existingUser -> {
+            if (!existingUser.getId().equals(userId)) {
+                throw new DuplicatedDataException(String.format("Пользователь с email %s уже существует", email));
+            }
+        });
     }
 }
