@@ -73,7 +73,7 @@ public class RequestServiceTest {
         UserDto user = userService.create(user1);
         RequestDto itemRequest = requestService.create(user.getId(), itemRequest1);
 
-        List<RequestDto> itemRequests = requestService.GetAllRequestsById(user.getId()).stream()
+        List<RequestDto> itemRequests = requestService.getAllRequestsById(user.getId()).stream()
                 .toList();
 
         assertThat(itemRequests).hasSize(1);

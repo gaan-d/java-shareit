@@ -3,7 +3,6 @@ package ru.practicum.shareit.item.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.val;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +51,7 @@ public class ItemServiceImpl implements ItemService {
 
         if (itemDto.getRequestId() != null) {
             Request request = requestRepository.findById(itemDto.getRequestId())
-                    .orElseThrow(()->new NotFoundException("Запрос не найден"));
+                    .orElseThrow(() -> new NotFoundException("Запрос не найден"));
             item.setRequest(request);
         }
         return mapToItemDto(itemRepository.save(item));

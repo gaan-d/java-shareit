@@ -80,7 +80,7 @@ public class RequestControllerTest {
 
     @Test
     void getAllRequestsById() throws Exception {
-        when(requestService.GetAllRequestsById(userId))
+        when(requestService.getAllRequestsById(userId))
                 .thenReturn(List.of(requestDto));
 
         mvc.perform(get("/requests")

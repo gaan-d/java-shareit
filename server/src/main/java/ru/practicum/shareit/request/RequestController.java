@@ -25,7 +25,7 @@ public class RequestController {
 
     @GetMapping
     public List<RequestDto> getAllRequestsById(@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return requestService.GetAllRequestsById(userId);
+        return requestService.getAllRequestsById(userId);
     }
 
     @GetMapping("/all")

@@ -8,7 +8,7 @@ import java.util.List;
 public interface RequestService {
     RequestDto create(Long userId, NewRequestDto request);
 
-    List<RequestDto> GetAllRequestsById(Long userId);
+    List<RequestDto> getAllRequestsById(Long userId);
 
     List<RequestDto> findAll(Long userId, Integer from, Integer size);
 

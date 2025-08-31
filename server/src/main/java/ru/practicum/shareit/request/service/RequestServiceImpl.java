@@ -41,12 +41,12 @@ public class RequestServiceImpl implements RequestService {
 
 
     @Override
-    public List<RequestDto> GetAllRequestsById(Long userId) {
+    public List<RequestDto> getAllRequestsById(Long userId) {
         userService.validateExistenceById(userId);
         return requestRepository.findAllByRequesterId(userId, Sort.by(Sort.Direction.DESC, "created"))
                 .stream()
                 .map(request -> {
-                    RequestDto requestDto =RequestMapper.mapToRequestDto(request);
+                    RequestDto requestDto = RequestMapper.mapToRequestDto(request);
                     loadDetails(requestDto);
                     return requestDto;
                 })
@@ -60,7 +60,7 @@ public class RequestServiceImpl implements RequestService {
             throw new ValidationException("Неверные параметры пагинации");
         }
         return requestRepository.findAll(PageRequest.of((from / size), size,
-                Sort.by(Sort.Direction.DESC,  "created")))
+                        Sort.by(Sort.Direction.DESC, "created")))
                 .stream()
                 .map(request -> {
                     RequestDto requestDto = RequestMapper.mapToRequestDto(request);
@@ -83,7 +83,7 @@ public class RequestServiceImpl implements RequestService {
     @Transactional
     private void loadDetails(RequestDto requestDto) {
         List<ItemDto> items = itemRepository.findByRequestIdOrderByRequestIdDesc(requestDto.getId()).stream()
-                .map(ItemMapper :: mapToItemDto)
+                .map(ItemMapper::mapToItemDto)
                 .toList();
         requestDto.setItems(items);
     }
